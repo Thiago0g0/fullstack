@@ -22,12 +22,12 @@ const style = StyleSheet.create({
 const splashScreen = function () {
     return <View style={style.container}>
         <LinearGradient
-            colors={['green', 'black']}
+            colors={['#07810d', '#048061', '#1fd668']}
             style={style.background}
         />
         <Link href="/TLogin">
         <Image style={style.logo}
-            source={require('../assets/images/spot.png')}
+            source={require('../assets/images/MusicFake.png')}
         />
         </Link>
     </View>
