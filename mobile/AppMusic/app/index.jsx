@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { Image, View, StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Link } from 'expo-router';
@@ -27,7 +26,7 @@ const splashScreen = function () {
         />
         <Link href="/TLogin">
         <Image style={style.logo}
-            source={require('../assets/images/MusicFake.png')}
+            source={require('../assets/images/spot.png')}
         />
         </Link>
     </View>

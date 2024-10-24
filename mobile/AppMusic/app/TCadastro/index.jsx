@@ -1,27 +1,45 @@
-// TELA DE CADASTRO
-
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, TextInput, Pressable } from 'react-native';
 import { Link } from '@react-navigation/native'; 
 
 const Cadastro = () => {
-    const [username, setUsername] = useState('');
+    const [nome, setNome] = useState('');
+    const [sobrenome, setSobrenome] = useState('');
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [senhaSegura, setSenhaSegura] = useState('');
+    const [confirmarSenha, setConfirmarSenha] = useState('');
+    const [dataNascimento, setDataNascimento] = useState('');
 
     const handleSubmit = () => {
-        console.log('Cadastro com:', username, email, password);
+        if (senhaSegura !== confirmarSenha) {
+            console.log('As senhas não coincidem');
+            return;
+        }
+        console.log('Cadastro com:', {
+            nome,
+            sobrenome,
+            email,
+            senha: senhaSegura,
+            dataNascimento,
+        });
     };
 
     return (
         <View style={styles.container}>
             <View style={styles.formContainer}>
                 <Text style={styles.title}>Cadastro</Text>
+                
                 <TextInput
                     style={styles.input}
-                    placeholder="Usuário"
-                    value={username}
-                    onChangeText={setUsername}
+                    placeholder="Nome"
+                    value={nome}
+                    onChangeText={setNome}
+                />
+                <TextInput
+                    style={styles.input}
+                    placeholder="Sobrenome"
+                    value={sobrenome}
+                    onChangeText={setSobrenome}
                 />
                 <TextInput
                     style={styles.input}
@@ -32,16 +50,31 @@ const Cadastro = () => {
                 />
                 <TextInput
                     style={styles.input}
+                    placeholder="Data de Nascimento (DD/MM/AAAA)"
+                    value={dataNascimento}
+                    onChangeText={setDataNascimento}
+                />
+                <TextInput
+                    style={styles.input}
                     placeholder="Senha"
-                    value={password}
-                    onChangeText={setPassword}
+                    value={senhaSegura}
+                    onChangeText={setSenhaSegura}
                     secureTextEntry
                 />
-                
+                <TextInput
+                    style={styles.input}
+                    placeholder="Confirmar Senha"
+                    value={confirmarSenha}
+                    onChangeText={setConfirmarSenha}
+                    secureTextEntry
+                />
+
                 <Pressable style={styles.button} onPress={handleSubmit}>
-                    <Link to='/TLogin'><Text style={styles.buttonText}>Cadastrar</Text></Link>
+                    <Link to='/TLogin'>
+                        <Text style={styles.buttonText}>Cadastrar</Text>
+                    </Link>
                 </Pressable>
-                
+
                 <Link to="/TLogin" style={styles.link}>
                     <Text style={styles.linkText}>Já tem uma conta? Faça Login</Text>
                 </Link>
@@ -55,21 +88,26 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        width: '100%',
-        gap: 20,
+        padding: 20, 
+        backgroundColor: '#f5f5f5',
     },
     formContainer: {
-        width: '40%',
-        backgroundColor: '',
+        width: '100%', 
+        maxWidth: 400, 
+        backgroundColor: '#fff',
         padding: 20,
         borderRadius: 10,
         elevation: 3,
-        flex: 1,
+        shadowColor: '#000',
+        shadowOpacity: 0.3,
+        shadowRadius: 5,
     },
     title: {
         fontSize: 24,
         textAlign: 'center',
         marginBottom: 20,
+        fontWeight: 'bold',
+        color: '#333',
     },
     input: {
         height: 40,
@@ -81,13 +119,15 @@ const styles = StyleSheet.create({
     },
     button: {
         backgroundColor: 'black',
-        padding: 10,
+        paddingVertical: 12,
         borderRadius: 4,
         alignItems: 'center',
+        marginTop: 10,
     },
     buttonText: {
         color: '#fff',
         fontSize: 16,
+        fontWeight: 'bold',
     },
     link: {
         marginTop: 15,
@@ -95,7 +135,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     linkText: {
-        color: '#',
+        color: '#0000FF',
+        fontSize: 16,
     },
 });
 

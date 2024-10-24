@@ -49,59 +49,53 @@ export default function App() {
             setMensagem("Houve um erro ao realizar o cadastro.");
         }
     };
-    
+
     return (
         <View style={styles.container}>
-            <View style={styles.saldoContainer}>
-                <Text style={styles.label}>Login</Text>
+            <Text style={styles.label}>Login</Text>
+
+            <View style={styles.inputContainer}>
+                <TextInput
+                    style={styles.input}
+                    placeholder="Digite o nome..."
+                    value={formData.name}
+                    onChangeText={(text) => handleChange('name', text)}
+                />
+                <Icon style={styles.icon} name='user' size={25} color="#000" />
             </View>
-            <View style={styles.saldoContainer}>
-                <View style={styles.inputContainer}>
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Digite o nome..."
-                        value={formData.name}
-                        onChangeText={(text) => handleChange('name', text)}
-                    />
-                    <Icon style={styles.iconu} name='user' size={25} color="#fff" />
-                </View>
+
+            <View style={styles.inputContainer}>
+                <TextInput
+                    style={styles.input}
+                    keyboardType="email-address"
+                    placeholder="Digite o email..."
+                    value={formData.email}
+                    onChangeText={(text) => handleChange('email', text)}
+                />
+                <Icon style={styles.icon} name='mail' size={25} color="#000" />
             </View>
-            <View style={styles.saldoContainer}>
-                <View style={styles.inputContainer}>
-                    <TextInput
-                        style={styles.input}
-                        keyboardType="email-address"
-                        placeholder="Digite o email..."
-                        value={formData.email}
-                        onChangeText={(text) => handleChange('email', text)}
-                    />
-                    <Icon style={styles.iconm} name='mail' size={25} color="#fff" />
-                </View>
+
+            <View style={styles.inputContainer}>
+                <TextInput
+                    style={styles.input}
+                    placeholder="Digite a senha..."
+                    value={formData.password}
+                    onChangeText={(text) => handleChange('password', text)}
+                    secureTextEntry={!showSenha}
+                />
+                <Pressable onPress={() => setShowSenha(!showSenha)}>
+                    <Iconsenha name={showSenha ? 'eye-off' : 'eye'} size={25} color="#000" />
+                </Pressable>
             </View>
-            <View style={styles.saldoContainer}>
-                <View style={styles.inputContainer}>
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Digite a senha..."
-                        value={formData.password}
-                        onChangeText={(text) => handleChange('password', text)}
-                        secureTextEntry={showSenha}
-                    />
-                    <Pressable style={styles.icon} onPress={() => setShowSenha(!showSenha)}>
-                        <Iconsenha style={styles.icon} name={showSenha ? 'eye' : 'eye-off'} color="#FFF" size={30} />
-                    </Pressable>
-                </View>
-            </View>
-            <View style={styles.formButton}>
-                <Link href="/">
-                    <Pressable style={styles.buttoncadastro} onPress={handleSubmit}>
-                        <Text style={styles.cadastro}>Entrar</Text>
-                    </Pressable>
-                </Link>
-                <Link href="/TCadastro" style={styles.link}>
-                    <Text style={styles.linkText}>Fazer cadastro!</Text>
-                </Link>
-            </View>
+
+            <Pressable style={styles.button} onPress={handleSubmit}>
+                <Text style={styles.buttonText}>entrar</Text>
+            </Pressable>
+
+            <Link href="/TCadastro" style={styles.link}>
+                <Text style={styles.linkText}>Já tem uma conta? Faça Login</Text>
+            </Link>
+
             {mensagem ? <Text style={styles.mensagem}>{mensagem}</Text> : null}
         </View>
     );
@@ -109,78 +103,60 @@ export default function App() {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'white',
-        height: '100%',
-        flexDirection: 'column',
-        alignItems: 'center',
+        flex: 1,
+        backgroundColor: '#fff',
+        padding: 20,
         justifyContent: 'center',
-        gap: 20,
-    },
-    icon: {
-        color: 'black',
-        marginRight: 3,
-    },
-    iconu: {
-        color: 'black',
-        marginRight: 1,
-    },
-    iconm: {
-        color: 'black',
-        marginRight: 1,
     },
     label: {
-        alignItems: 'center',
-        fontSize: 30,
-        margin: 20
-    },
-    formButton: {
-        marginTop: 110,
-        flexDirection: 'column',
-        alignItems: 'center', 
+        fontSize: 24,
+        fontWeight: 'bold',
+        marginBottom: 20,
+        textAlign: 'center',
     },
     inputContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        borderWidth: 1,
-        borderColor: '#ccc',
-        borderRadius: 5,
         backgroundColor: '#f5f5f5',
-        paddingHorizontal: 15,
-        paddingVertical: 7,
-        width: 750,
+        borderRadius: 5,
+        borderWidth: 1,
+        borderColor: '#ddd',
+        marginBottom: 15,
+        paddingHorizontal: 10,
     },
     input: {
         flex: 1,
         height: 40,
-        fontSize: 15,
+        fontSize: 16,
+        paddingHorizontal: 10,
         color: '#333',
     },
-
-    buttoncadastro: {
-        width: 300,
-        height: 57,
+    icon: {
+        marginLeft: 10,
+    },
+    button: {
         backgroundColor: 'black',
+        paddingVertical: 15,
         borderRadius: 5,
-        paddingVertical: 10,
-        paddingHorizontal: 20,
         alignItems: 'center',
-        justifyContent: 'center',
-        margin: 10,
-        marginTop: -40
+        marginBottom: 20,
     },
     buttonText: {
-        fontSize: 30,
-        textAlign: 'center',
+        color: '#fff',
+        fontSize: 18,
     },
-    cadastro: {
-        fontSize: 20,
-        textAlign: 'center',
-        color: 'white',
+    link: {
+        alignItems: 'center',
+        marginBottom: 20,
     },
     linkText: {
-        fontSize: 16,
         color: '#0000FF',
-        marginTop: 10,
+        fontSize: 16,
+    },
+    mensagem: {
+        fontSize: 16,
+        color: 'green',
         textAlign: 'center',
+        marginTop: 10,
     },
 });
