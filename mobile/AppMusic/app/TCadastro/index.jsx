@@ -34,12 +34,14 @@ const Cadastro = () => {
                     placeholder="Nome"
                     value={nome}
                     onChangeText={setNome}
+                    placeholderTextColor="#aaaaaa" 
                 />
                 <TextInput
                     style={styles.input}
                     placeholder="Sobrenome"
                     value={sobrenome}
                     onChangeText={setSobrenome}
+                    placeholderTextColor="#aaaaaa"
                 />
                 <TextInput
                     style={styles.input}
@@ -47,12 +49,14 @@ const Cadastro = () => {
                     value={email}
                     onChangeText={setEmail}
                     keyboardType="email-address"
+                    placeholderTextColor="#aaaaaa"
                 />
                 <TextInput
                     style={styles.input}
                     placeholder="Data de Nascimento (DD/MM/AAAA)"
                     value={dataNascimento}
                     onChangeText={setDataNascimento}
+                    placeholderTextColor="#aaaaaa"
                 />
                 <TextInput
                     style={styles.input}
@@ -60,6 +64,7 @@ const Cadastro = () => {
                     value={senhaSegura}
                     onChangeText={setSenhaSegura}
                     secureTextEntry
+                    placeholderTextColor="#aaaaaa"
                 />
                 <TextInput
                     style={styles.input}
@@ -67,6 +72,7 @@ const Cadastro = () => {
                     value={confirmarSenha}
                     onChangeText={setConfirmarSenha}
                     secureTextEntry
+                    placeholderTextColor="#aaaaaa"
                 />
 
                 <Pressable style={styles.button} onPress={handleSubmit}>
@@ -89,12 +95,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         padding: 20, 
-        backgroundColor: '#f5f5f5',
+        backgroundColor: '#121212', 
     },
     formContainer: {
         width: '100%', 
         maxWidth: 400, 
-        backgroundColor: '#fff',
+        backgroundColor: '#1e1e1e', 
         padding: 20,
         borderRadius: 10,
         elevation: 3,
@@ -107,7 +113,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginBottom: 20,
         fontWeight: 'bold',
-        color: '#333',
+        color: '#ffffff', 
     },
     input: {
         height: 40,
@@ -116,9 +122,11 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         paddingHorizontal: 10,
         marginBottom: 15,
+        backgroundColor: '#333333', 
+        color: '#ffffff', 
     },
     button: {
-        backgroundColor: 'black',
+        backgroundColor: '#403d39', 
         paddingVertical: 12,
         borderRadius: 4,
         alignItems: 'center',
@@ -135,7 +143,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     linkText: {
-        color: '#0000FF',
+        color: 'white', 
         fontSize: 16,
     },
 });

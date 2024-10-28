@@ -6,47 +6,41 @@ import { Link } from 'expo-router';
 
 export default function App() {
     const [formData, setFormData] = useState({
-        name: '',
+        nome: '',
         email: '',
-        password: '',
+        senha: '',
     });
-    const [showSenha, setShowSenha] = useState(false);
-    const [mensagem, setMensagem] = useState('');
+    const [mostrarSenha, setMostrarSenha] = useState(false);
 
-    const handleChange = (name, value) => {
+    const handleChange = (nome, valor) => {
         setFormData(prevState => ({
             ...prevState,
-            [name]: value,
+            [nome]: valor,
         }));
     };
 
     const handleSubmit = async () => {
-        if (!formData.name || !formData.email || !formData.password) {
+        if (!formData.nome || !formData.email || !formData.senha) {
             Alert.alert("Todos os campos devem ser preenchidos");
             return;
         }
-        try {
-            const response = await fetch('https://taskhub-s37f.onrender.com/auth/signup', {
-                method: "POST",
-                headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(formData),
-            });
 
-            if (!response.ok) {
-                throw new Error('Erro na solicitação: ' + response.statusText);
-            }
+        const response = await fetch('https://taskhub-s37f.onrender.com/auth/signup', {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
+        });
 
-            setMensagem("Cadastro realizado com sucesso!");
+        if (response.ok) {
+            Alert.alert("Cadastro realizado com sucesso!");
             setFormData({
-                name: '',
+                nome: '',
                 email: '',
-                password: '',
+                senha: '',
             });
-        } catch (error) {
-            setMensagem("Houve um erro ao realizar o cadastro.");
         }
     };
 
@@ -58,10 +52,11 @@ export default function App() {
                 <TextInput
                     style={styles.input}
                     placeholder="Digite o nome..."
-                    value={formData.name}
-                    onChangeText={(text) => handleChange('name', text)}
+                    placeholderTextColor="#888"
+                    value={formData.nome}
+                    onChangeText={(text) => handleChange('nome', text)}
                 />
-                <Icon style={styles.icon} name='user' size={25} color="#000" />
+                <Icon style={styles.icon} name='user' size={25} color="#ffffff" />
             </View>
 
             <View style={styles.inputContainer}>
@@ -69,34 +64,36 @@ export default function App() {
                     style={styles.input}
                     keyboardType="email-address"
                     placeholder="Digite o email..."
+                    placeholderTextColor="#888"
                     value={formData.email}
                     onChangeText={(text) => handleChange('email', text)}
                 />
-                <Icon style={styles.icon} name='mail' size={25} color="#000" />
+                <Icon style={styles.icon} name='mail' size={25} color="#ffffff" />
             </View>
 
             <View style={styles.inputContainer}>
                 <TextInput
                     style={styles.input}
                     placeholder="Digite a senha..."
-                    value={formData.password}
-                    onChangeText={(text) => handleChange('password', text)}
-                    secureTextEntry={!showSenha}
+                    placeholderTextColor="#888"
+                    value={formData.senha}
+                    onChangeText={(text) => handleChange('senha', text)}
+                    secureTextEntry={!mostrarSenha}
                 />
-                <Pressable onPress={() => setShowSenha(!showSenha)}>
-                    <Iconsenha name={showSenha ? 'eye-off' : 'eye'} size={25} color="#000" />
+                <Pressable onPress={() => setMostrarSenha(!mostrarSenha)}>
+                    <Iconsenha name={mostrarSenha ? 'eye-off' : 'eye'} size={25} color="#ffffff" />
                 </Pressable>
             </View>
 
-            <Pressable style={styles.button} onPress={handleSubmit}>
-                <Text style={styles.buttonText}>entrar</Text>
-            </Pressable>
+            <View style={styles.buttonContainer}>
+                <Link href="/THome" style={styles.button}>
+                    <Text style={styles.buttonText}>Logar</Text>
+                </Link>
+            </View>
 
             <Link href="/TCadastro" style={styles.link}>
                 <Text style={styles.linkText}>Já tem uma conta? Faça Login</Text>
             </Link>
-
-            {mensagem ? <Text style={styles.mensagem}>{mensagem}</Text> : null}
         </View>
     );
 }
@@ -104,7 +101,7 @@ export default function App() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#121212',
         padding: 20,
         justifyContent: 'center',
     },
@@ -113,14 +110,15 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginBottom: 20,
         textAlign: 'center',
+        color: '#ffffff',
     },
     inputContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: '#f5f5f5',
+        backgroundColor: '#222',
         borderRadius: 5,
         borderWidth: 1,
-        borderColor: '#ddd',
+        borderColor: '#444',
         marginBottom: 15,
         paddingHorizontal: 10,
     },
@@ -129,34 +127,34 @@ const styles = StyleSheet.create({
         height: 40,
         fontSize: 16,
         paddingHorizontal: 10,
-        color: '#333',
+        color: '#ffffff',
     },
     icon: {
         marginLeft: 10,
     },
+    buttonContainer: {
+        alignItems: 'center', 
+        marginBottom: 20,
+    },
     button: {
-        backgroundColor: 'black',
+        backgroundColor: '#403d39',
         paddingVertical: 15,
         borderRadius: 5,
-        alignItems: 'center',
-        marginBottom: 20,
+        width: '100%', 
+        textAlign: 'center',
+        alignSelf: 'center',
     },
     buttonText: {
         color: '#fff',
         fontSize: 18,
+        textAlign: 'center',
     },
     link: {
         alignItems: 'center',
         marginBottom: 20,
     },
     linkText: {
-        color: '#0000FF',
+        color: 'white',
         fontSize: 16,
-    },
-    mensagem: {
-        fontSize: 16,
-        color: 'green',
-        textAlign: 'center',
-        marginTop: 10,
     },
 });
