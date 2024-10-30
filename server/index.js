@@ -2,8 +2,11 @@ import Express from 'express'
 import { User, criarTabelas } from './db.js'
 import bcryptjs from 'bcryptjs'
 import jwt from 'jsonwebtoken'
+import cors from 'cors'
+
 const app = Express()
 app.use(Express.json())
+app.use(cors())
 
 //criarTabelas()
 app.post('/registro', async function (req, res) {
@@ -50,14 +53,14 @@ app.post('/login', async function(req, res){
         //verificar a existencia do usuario
         const usuario = await User.findOne({where:{email:email}}) // essa linha procura por email
         if (!usuario) {
-            res.send('este email nao esta cadastrado')
+            res.status(404).send('este email nao esta cadastrado')
             return
         }
 
         //comparo a senha enviada com a senha do banco de dados
        const senhaCorreta = bcryptjs.compareSync(senha, usuario.senha)
         if (!senhaCorreta) {
-            res.send('A senha esta incorreta')
+            res.status(404).send('A senha esta incorreta')
             return
         }
 
@@ -76,7 +79,7 @@ app.post('/login', async function(req, res){
             {expiresIn: "30d"},
         )
         
-        res.send({msg:'voce foi logado', token: token})
+        res.status(200).send({msg:'voce foi logado', token: token})
     } catch (erro) {
         console.log(erro)
         res.status(500).send("Houve um problema")

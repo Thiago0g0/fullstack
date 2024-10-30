@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Pressable, StyleSheet, Alert } from 'react-native';
+import { View, Text, TextInput, Pressable, StyleSheet, Alert, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Iconsenha from 'react-native-vector-icons/Ionicons';
-import { Link } from 'expo-router';
+import { Link, useRouter } from 'expo-router';
 
 export default function App() {
+    const router = useRouter()
     const [formData, setFormData] = useState({
-        nome: '',
         email: '',
         senha: '',
     });
@@ -20,45 +20,39 @@ export default function App() {
     };
 
     const handleSubmit = async () => {
-        if (!formData.nome || !formData.email || !formData.senha) {
-            Alert.alert("Todos os campos devem ser preenchidos");
+        if (!formData.email || !formData.senha) {
+            alert("Todos os campos devem ser preenchidos");
             return;
         }
-
-        const response = await fetch('https://taskhub-s37f.onrender.com/auth/signup', {
-            method: "POST",
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(formData),
-        });
-
-        if (response.ok) {
-            Alert.alert("Cadastro realizado com sucesso!");
-            setFormData({
-                nome: '',
-                email: '',
-                senha: '',
+        try {
+            const response = await fetch('http://localhost:8000/login/', {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
             });
-        }
+
+            console.log(response.status)
+            if (response.status === 404) {
+                alert("email ou senha incorretos");
+                return
+            }
+
+            if (response.status === 200) {
+                router.push('/THome')
+                return
+            }
+        } catch (error) {
+            console.error('Erro:', error);
+        } 
+       
     };
 
     return (
         <View style={styles.container}>
             <Text style={styles.label}>Login</Text>
-
-            <View style={styles.inputContainer}>
-                <TextInput
-                    style={styles.input}
-                    placeholder="Digite o nome..."
-                    placeholderTextColor="#888"
-                    value={formData.nome}
-                    onChangeText={(text) => handleChange('nome', text)}
-                />
-                <Icon style={styles.icon} name='user' size={25} color="#ffffff" />
-            </View>
-
             <View style={styles.inputContainer}>
                 <TextInput
                     style={styles.input}
@@ -86,9 +80,11 @@ export default function App() {
             </View>
 
             <View style={styles.buttonContainer}>
-                <Link href="/THome" style={styles.button}>
+                <TouchableOpacity
+                    style={styles.button}
+                    onPress={handleSubmit}>
                     <Text style={styles.buttonText}>Logar</Text>
-                </Link>
+                </TouchableOpacity>
             </View>
 
             <Link href="/TCadastro" style={styles.link}>
@@ -133,14 +129,14 @@ const styles = StyleSheet.create({
         marginLeft: 10,
     },
     buttonContainer: {
-        alignItems: 'center', 
+        alignItems: 'center',
         marginBottom: 20,
     },
     button: {
         backgroundColor: '#403d39',
         paddingVertical: 15,
         borderRadius: 5,
-        width: '100%', 
+        width: '100%',
         textAlign: 'center',
         alignSelf: 'center',
     },
