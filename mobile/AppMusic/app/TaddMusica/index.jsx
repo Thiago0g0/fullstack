@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, Text, TextInput, Pressable, FlatList, Alert } from 'react-native';
+import { View, StyleSheet, Text, TextInput, Pressable, FlatList, Alert, Image } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Link } from 'expo-router';
 
 const App = () => {
   const [titulo, setTitulo] = useState('');
@@ -59,7 +60,15 @@ const App = () => {
 
   return (
     <View style={estilos.container}>
-      <Text style={estilos.titulo}>Músicas</Text>
+      <View style={estilos.header}>
+        <Link href="/THome" style={estilos.link}>
+          <Image
+            source={require('../../assets/images/seta.png')}
+            style={estilos.logo}
+          />
+        </Link>
+        <Text style={estilos.titulo}>Músicas</Text>
+      </View>
 
       <TextInput
         style={estilos.input}
@@ -76,6 +85,7 @@ const App = () => {
         value={titulo}
         onChangeText={setTitulo}
       />
+
       <TextInput
         style={estilos.input}
         placeholder="Descrição"
@@ -83,6 +93,7 @@ const App = () => {
         value={descricao}
         onChangeText={setDescricao}
       />
+
       <TextInput
         style={estilos.input}
         placeholder="Gênero"
@@ -90,6 +101,7 @@ const App = () => {
         value={genero}
         onChangeText={setGenero}
       />
+
       <TextInput
         style={estilos.input}
         placeholder="Duração"
@@ -97,6 +109,7 @@ const App = () => {
         value={duracao}
         onChangeText={setDuracao}
       />
+
       <TextInput
         style={estilos.input}
         placeholder="Link"
@@ -132,12 +145,27 @@ const estilos = StyleSheet.create({
     padding: 10,
     backgroundColor: '#121212',
   },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 15,
+  },
+  link: {
+    position: 'absolute',
+    left: 0,
+    top: 0,
+  },
+  logo: {
+    width: 30,
+    height: 30,
+    padding: 10
+  },
   titulo: {
     fontSize: 22,
     fontWeight: 'bold',
     textAlign: 'center',
+    flex: 1,
     color: '#ffffff',
-    marginVertical: 15,
   },
   botao: {
     backgroundColor: '#403d39',

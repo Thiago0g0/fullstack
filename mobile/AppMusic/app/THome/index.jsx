@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, FlatList, StyleSheet, Image, Pressable } from 'react-native';
+import { View, Text, TextInput, FlatList, StyleSheet, Image} from 'react-native';
 import { Link } from 'expo-router';
 
 const musicas = [
@@ -27,7 +27,7 @@ const Home = () => {
         <View style={styles.container}>
             <View style={styles.header}>
                 <Text style={styles.title}>Pesquisa de Músicas</Text>
-                <Link href="/TPlaylist" style={styles.addButton}>
+                <Link href="/TaddMusica" style={styles.addButton}>
                     <Image
                         source={require('../../assets/images/mais.png')} 
                         style={styles.addIcon}
@@ -41,6 +41,7 @@ const Home = () => {
                 value={searchQuery}
                 onChangeText={handleSearch}
             />
+        
             <FlatList
                 data={filteredMusicas}
                 keyExtractor={item => item.id}
@@ -80,8 +81,8 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     addIcon: {
-        width: 30, // Ajuste conforme necessário
-        height: 30, // Ajuste conforme necessário
+        width: 30, 
+        height: 30, 
     },
     input: {
         height: 40,
