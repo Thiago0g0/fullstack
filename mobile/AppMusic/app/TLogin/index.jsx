@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Pressable, StyleSheet, Alert, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, Pressable, StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Iconsenha from 'react-native-vector-icons/Ionicons';
 import { Link, useRouter } from 'expo-router';

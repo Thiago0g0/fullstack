@@ -81,7 +81,7 @@ const Cadastro = () => {
                     </Link>
                 </Pressable>
 
-                <Link to="/TLogin" style={styles.link}>
+                <Link to='' style={styles.link}>
                     <Text style={styles.linkText}>Já tem uma conta? Faça Login</Text>
                 </Link>
             </View>
