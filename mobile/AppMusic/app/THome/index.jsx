@@ -1,113 +1,88 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, FlatList, StyleSheet, Image} from 'react-native';
+import React from 'react';
+import { View, Text, Image, StyleSheet, ScrollView } from 'react-native';
 import { Link } from 'expo-router';
+import Feather from '@expo/vector-icons/Feather';
 
-const musicas = [
-    { id: '1', titulo: 'Bohemian Rhapsody', genero: 'Rock', banda: 'Queen'},
-    { id: '2', titulo: 'One Last Breath', genero: 'Rock', banda: 'Creed'},
-    { id: '3', titulo: 'Die with A Slime', genero: 'Pop', banda: 'Lady Gaga'},
-    { id: '4', titulo: 'Dormi Na Praça', genero: 'Sertanejo', banda: 'Chitãozinho & Xororó'},
-    { id: '5', titulo: 'Simon Says', genero: 'Pop', banda: 'Pharoahe Monch'},
-    { id: '6', titulo: 'What A Wonderful World', genero: 'Jazz Clássico'}
-];
-
-const Home = () => {
-    const [searchQuery, setSearchQuery] = useState('');
-    const [filteredMusicas, setFilteredMusicas] = useState(musicas);
-
-    const handleSearch = (query) => {
-        setSearchQuery(query);
-        const filtered = musicas.filter(musica =>
-            musica.titulo.toLowerCase().includes(query.toLowerCase())
-        );
-        setFilteredMusicas(filtered);
-    };
-
+const HomeScreen = () => {
     return (
-        <View style={styles.container}>
+        <ScrollView contentContainerStyle={styles.container}>
             <View style={styles.header}>
-                <Text style={styles.title}>Pesquisa de Músicas</Text>
-                <Link href="/TaddMusica" style={styles.addButton}>
-                    <Image
-                        source={require('../../assets/images/mais.png')} 
-                        style={styles.addIcon}
-                    />
+                <Text style={styles.title}>Music</Text>
+                <Link href="/">
+                    <Feather name="settings" size={24} color="white" />
                 </Link>
             </View>
-            <TextInput
-                style={styles.input}
-                placeholder="Digite o título da música..."
-                placeholderTextColor="#888"
-                value={searchQuery}
-                onChangeText={handleSearch}
-            />
-        
-            <FlatList
-                data={filteredMusicas}
-                keyExtractor={item => item.id}
-                renderItem={({ item }) => (
-                    <View style={styles.item}>
-                        <Image
-                            style={styles.img}
-                            source={{ uri: item.src }}
-                        />
-                        <Text style={styles.itemText}>{item.titulo} - {item.genero} - {item.banda}</Text>
-                    </View>
-                )}
-                ListEmptyComponent={<Text style={styles.emptyText}>Nenhuma música encontrada.</Text>}
-            />
-        </View>
+
+            <Link href="/" style={styles.navButton}>
+                <Text style={styles.navButtonText}>Criar playlist</Text>
+            </Link>
+
+            <Text style={styles.sectionTitle}>Gêneros de músicas</Text>
+            <View style={styles.musicGrid}>
+                <Image source={require('../../assets/images/spot.png')} style={styles.musicItem} />
+                <Image source={require('../../assets/images/spot.png')} style={styles.musicItem} />
+                <Image source={require('../../assets/images/spot.png')} style={styles.musicItem} />
+                <Image source={require('../../assets/images/spot.png')} style={styles.musicItem} />
+                <Image source={require('../../assets/images/spot.png')} style={styles.musicItem} />
+                <Image source={require('../../assets/images/spot.png')} style={styles.musicItem} />
+                
+            </View>
+        </ScrollView>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        padding: 16,
         backgroundColor: '#121212',
-        padding: 20,
+        flex: 1,
     },
     header: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginBottom: 10,
+        marginBottom: 20,
     },
     title: {
         fontSize: 24,
         fontWeight: 'bold',
         color: '#ffffff',
     },
-    addButton: {
-        padding: 10,
+    profileImage: {
+        width: 35,
+        height: 35,
+        borderRadius: 25,
     },
-    addIcon: {
-        width: 30, 
-        height: 30, 
-    },
-    input: {
-        height: 40,
-        borderColor: '#444',
-        borderWidth: 1,
-        borderRadius: 5,
-        paddingHorizontal: 11,
-        color: '#ffffff',
-        marginBottom: 15,
-    },
-    item: {
-        flexDirection: 'row',
+    navButton: {
+        backgroundColor: '#403d39',
+        paddingVertical: 12,
+        borderRadius: 8,
         alignItems: 'center',
-        padding: 15,
-        borderBottomWidth: 1,
-        borderBottomColor: '#444',
+        justifyContent: 'center',
+        marginBottom: 20,
     },
-    itemText: {
+    navButtonText: {
         color: '#ffffff',
+        fontSize: 16,
     },
-    emptyText: {
+    sectionTitle: {
+        fontSize: 20,
+        fontWeight: 'bold',
         color: '#ffffff',
-        textAlign: 'center',
-        marginTop: 20,
+        marginBottom: 10,
+    },
+    musicGrid: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'space-between',
+    },
+    musicItem: {
+        width: '48%',
+        height: 100,
+        borderRadius: 10,
+        backgroundColor: '#333333',
+        marginBottom: 10,
     },
 });
 
-export default Home;
+export default HomeScreen;
