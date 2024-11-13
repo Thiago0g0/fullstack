@@ -26,8 +26,8 @@ export default function App() {
         }
         try {
             const response = await fetch('http://localhost:8000/autenticacao/login', {
-                method: 'POST',
-                headers: {
+                    method: 'POST',
+                    headers: {
                     Accept: 'application/json',
                     'Content-Type': 'application/json'
                 },
@@ -35,8 +35,13 @@ export default function App() {
             });
 
             console.log(response.status)
+            if (response.status === 405) {
+                alert("email incorretos");
+                return
+            }
+
             if (response.status === 404) {
-                alert("email ou senha incorretos");
+                alert("senha incorretos");
                 return
             }
 

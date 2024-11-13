@@ -8,12 +8,12 @@ const HomeScreen = () => {
         <ScrollView contentContainerStyle={styles.container}>
             <View style={styles.header}>
                 <Text style={styles.title}>Music</Text>
-                <Link href="/">
+                <Link href="/Tconfig">
                     <Feather name="settings" size={24} color="white" />
                 </Link>
             </View>
 
-            <Link href="/" style={styles.navButton}>
+            <Link href="/Tplaylist" style={styles.navButton}>
                 <Text style={styles.navButtonText}>Criar playlist</Text>
             </Link>
 

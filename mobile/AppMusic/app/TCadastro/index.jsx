@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, TextInput, Pressable } from 'react-native';
 import { Link } from '@react-navigation/native'; 
+import { useRouter } from 'expo-router';
 
 const Cadastro = () => {
     const [nome, setNome] = useState('');
@@ -10,19 +11,50 @@ const Cadastro = () => {
     const [confirmarSenha, setConfirmarSenha] = useState('');
     const [dataNascimento, setDataNascimento] = useState('');
 
-    const handleSubmit = () => {
+    const router = useRouter()
+
+    const handleSubmit = async() => {
         if (senhaSegura !== confirmarSenha) {
-            console.log('As senhas não coincidem');
+            alert('As senhas não coincidem');
             return;
         }
-        console.log('Cadastro com:', {
-            nome,
-            sobrenome,
-            email,
-            senha: senhaSegura,
-            dataNascimento,
-        });
-    };
+        const response = await fetch('http://localhost:8000/autenticacao/registro', {
+                    method: 'POST',
+                    headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                    },
+                body: JSON.stringify({
+                    nome: nome,
+                    sobrenome: sobrenome,
+                    email: email,
+                    senha: senhaSegura,
+                    dataNascimento: dataNascimento
+                })
+            });
+            try {
+                if (response.status === 406) {
+                alert('prencha todos os campos')
+                return
+            }
+
+            if (response.status === 400) {
+                alert('email ja existente')
+                return
+            }
+
+            if (response === 201) {
+                return router.push('/Thome')
+            }
+            } catch (error) {
+                console.error(error)
+                return
+            }
+            
+        
+        };
+
+    
 
     return (
         <View style={styles.container}>
@@ -76,9 +108,8 @@ const Cadastro = () => {
                 />
 
                 <Pressable style={styles.button} onPress={handleSubmit}>
-                    <Link to='/Tlogin'>
+
                         <Text style={styles.buttonText}>Cadastrar</Text>
-                    </Link>
                 </Pressable>
 
                 <Link to='/Tlogin' style={styles.link}>

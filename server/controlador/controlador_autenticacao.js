@@ -39,7 +39,7 @@ const login = async (req, res) =>{
         
         const usuario = await User.findOne({where:{email:email}}) 
         if (!usuario) {
-            res.status(404).send('este email nao esta cadastrado')
+            res.status(405).send('este email nao esta cadastrado')
             return
         }
 
