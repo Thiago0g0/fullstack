@@ -26,7 +26,7 @@ const splashScreen = function () {
             colors={['#07810d', '#048061', '#1fd668']}
             style={style.background}
         />
-        <Link href="/TLogin">
+        <Link href="/Tlogin">
         <Image style={style.logo}
             source={require('../assets/images/spot.png')}
         />

@@ -76,12 +76,12 @@ const Cadastro = () => {
                 />
 
                 <Pressable style={styles.button} onPress={handleSubmit}>
-                    <Link to='/TLogin'>
+                    <Link to='/Tlogin'>
                         <Text style={styles.buttonText}>Cadastrar</Text>
                     </Link>
                 </Pressable>
 
-                <Link to='' style={styles.link}>
+                <Link to='/Tlogin' style={styles.link}>
                     <Text style={styles.linkText}>Já tem uma conta? Faça Login</Text>
                 </Link>
             </View>

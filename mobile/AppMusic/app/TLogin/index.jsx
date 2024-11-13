@@ -25,7 +25,7 @@ export default function App() {
             return;
         }
         try {
-            const response = await fetch('http://localhost:8000/login/', {
+            const response = await fetch('http://localhost:8000/autenticacao/login', {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',
@@ -41,7 +41,7 @@ export default function App() {
             }
 
             if (response.status === 200) {
-                router.push('/THome')
+                router.push('/Thome')
                 return
             }
         } catch (error) {
@@ -87,7 +87,7 @@ export default function App() {
                 </TouchableOpacity>
             </View>
 
-            <Link href="/TCadastro" style={styles.link}>
+            <Link href="/Tcadastro" style={styles.link}>
                 <Text style={styles.linkText}>Já tem uma conta? Faça Login</Text>
             </Link>
         </View>
