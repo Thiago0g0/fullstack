@@ -43,7 +43,7 @@ const Cadastro = () => {
                 return
             }
 
-            if (response === 201) {
+            if (response.status === 201) {
                 return router.push('/Thome')
             }
             } catch (error) {
