@@ -1,28 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity, Link } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const ProfileScreen = () => {
     const [imageUri, setImageUri] = useState('');
-    const [items, setItems] = useState([]);
 
     useEffect(() => {
-    const loadImages = async () => {
-    const storedItems = await AsyncStorage.getItem('images');
-        if (storedItems) {
-    const parsedItems = JSON.parse(storedItems);
-            setItems(parsedItems);
-        if (parsedItems.length > 0) {
-            setImageUri(parsedItems[0].imageUri);
-    }
-        }
+        const loadImage = async () => {
+            const storedImage = await AsyncStorage.getItem('profileImage');
+            if (storedImage) {
+                setImageUri(storedImage);
+            }
         };
-        loadImages();
+        loadImage();
     }, []);
 
     const pickImage = async () => {
-    const result = await ImagePicker.launchImageLibraryAsync({
+        const result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.Images,
             allowsEditing: true,
             quality: 1,
@@ -31,22 +26,16 @@ const ProfileScreen = () => {
         if (!result.canceled) {
             const newUri = result.assets[0].uri;
             setImageUri(newUri);
-            addImage(newUri);
+            await AsyncStorage.setItem('profileImage', newUri); 
         }
-    };
-
-    const addImage = async (newUri) => {
-        const newItem = { id: Date.now().toString(), imageUri: newUri, title: 'Nome do Usuário', description: 'Descrição' };
-        const updatedItems = [...items, newItem];
-        await AsyncStorage.setItem('images', JSON.stringify(updatedItems));
-        setItems(updatedItems);
     };
 
     return (
         <View style={styles.container}>
             <View style={styles.profileHeader}>
+                <Image href="/Tconfig" source={require('../../../assets/images/seta.png')} style={styles.topLeftIcon} />
                 <TouchableOpacity onPress={pickImage}>
-                    <Image source={imageUri ? { uri: imageUri } : require('../../../assets/images/perfil.png')} style={styles.profileImage} />
+                    <Image source={imageUri ? { uri: imageUri } : require('../../../assets/images/profile.png')} style={styles.profileImage} />
                 </TouchableOpacity>
                 <Text style={styles.profileName}>Nome do Usuário</Text>
             </View>
@@ -64,6 +53,14 @@ const styles = StyleSheet.create({
     profileHeader: {
         alignItems: 'center',
         marginBottom: 20,
+        position: 'relative', 
+    },
+    topLeftIcon: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: 30,
+        height: 30,
     },
     profileImage: {
         width: 120,

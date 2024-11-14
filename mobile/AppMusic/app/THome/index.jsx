@@ -19,12 +19,12 @@ const HomeScreen = () => {
 
             <Text style={styles.sectionTitle}>Gêneros de músicas</Text>
             <View style={styles.musicGrid}>
-                <Image source={require('../../assets/images/spot.png')} style={styles.musicItem} />
-                <Image source={require('../../assets/images/spot.png')} style={styles.musicItem} />
-                <Image source={require('../../assets/images/spot.png')} style={styles.musicItem} />
-                <Image source={require('../../assets/images/spot.png')} style={styles.musicItem} />
-                <Image source={require('../../assets/images/spot.png')} style={styles.musicItem} />
-                <Image source={require('../../assets/images/spot.png')} style={styles.musicItem} />
+                <Image source={require('../../assets/images/Rok.png')} style={styles.musicItem} />
+                <Image source={require('../../assets/images/Rap1.png')} style={styles.musicItem} />
+                <Image source={require('../../assets/images/KPop1.png')} style={styles.musicItem} />
+                <Image source={require('../../assets/images/Jazz.png')} style={styles.musicItem} />
+                <Image source={require('../../assets/images/hphp.png')} style={styles.musicItem} />
+                <Image source={require('../../assets/images/reggae.png')} style={styles.musicItem} />
                 
             </View>
         </ScrollView>

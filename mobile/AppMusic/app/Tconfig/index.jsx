@@ -1,12 +1,12 @@
 import React from 'react';
-import { Text, TouchableOpacity, StyleSheet, View } from 'react-native';
+import { Text, TouchableOpacity, StyleSheet, View, Image, Link } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 const SettingsScreen = () => {
   return (
     <View style={styles.container}>
+      <Image href="/Thome" source={require("../../assets/images/seta.png")} style={styles.topLeftImage} />
       <Text style={styles.header}>Configurações</Text>
-
       <TouchableOpacity href='/Tconfig/Perfil/Index' style={styles.option}>
         <Icon name="person-outline" size={24} color="#FFF" />
         <Text style={styles.optionText}>Perfil</Text>
@@ -29,6 +29,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#121212',
+  },
+  topLeftImage: {
+    position: 'absolute',
+    top: 20, 
+    left: 20, 
+    width: 30, 
+    height: 35, 
   },
   header: {
     fontSize: 24,
