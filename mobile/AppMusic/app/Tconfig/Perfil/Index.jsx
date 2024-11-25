@@ -105,7 +105,7 @@ const ProfileScreen = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#E3F2FD',
+        backgroundColor: '#121212', 
         padding: 16,
     },
     profileHeader: {
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
         left: 0,
         width: 30,
         height: 30,
-        tintColor: '#1976D2',
+        tintColor: 'white', 
     },
     profileImage: {
         width: 120,
@@ -127,17 +127,17 @@ const styles = StyleSheet.create({
         borderRadius: 60,
         marginBottom: 12,
         borderWidth: 2,
-        borderColor: '#42A5F5',
+        borderColor: 'white',
     },
     profileName: {
         fontSize: 28,
         fontWeight: 'bold',
-        color: '#0D47A1',
+        color: 'white', 
         textAlign: 'center',
         marginBottom: 16,
     },
     button: {
-        backgroundColor: '#007BFF',
+        backgroundColor: '#404040', 
         paddingVertical: 12,
         paddingHorizontal: 24,
         borderRadius: 8,
@@ -156,11 +156,12 @@ const styles = StyleSheet.create({
     },
     input: {
         height: 40,
-        borderColor: '#ccc',
+        borderColor: 'white', 
         borderWidth: 1,
         borderRadius: 5,
         marginBottom: 10,
         paddingLeft: 10,
+        color: 'white',
     },
 });
 

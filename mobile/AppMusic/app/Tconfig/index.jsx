@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, TouchableOpacity, StyleSheet, View, Image } from 'react-native';
+import { Text, TouchableOpacity, StyleSheet, View } from 'react-native';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
@@ -9,32 +9,28 @@ import Octicons from '@expo/vector-icons/Octicons';
 const SettingsScreen = () => {
   return (
     <View style={styles.container}>
-      <AntDesign href="" name="arrowleft" size={24} color="blue" style={styles.topLeftImage} />
+      <AntDesign href="" name="arrowleft" size={24} color="white" style={styles.topLeftImage} />
       <Text style={styles.header}>Configurações</Text>
 
       <TouchableOpacity href='/Tconfig/Perfil/Index' style={styles.option}>
-      <FontAwesome6 name="user" size={24} color="blue" />        
-      <Text style={styles.optionText}>Perfil</Text>
+        <FontAwesome6 name="user" size={24} color="white" />        
+        <Text style={styles.optionText}>Perfil</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.option}>
-      <MaterialCommunityIcons name="lightning-bolt-outline" size={24} color="blue" />
+        <MaterialCommunityIcons name="lightning-bolt-outline" size={24} color="white" />
         <Text style={styles.optionText}>Novidades</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.option}>
-      <Octicons name="bell" size={24} color="blue" />        
-      <Text style={styles.optionText}>Notificação</Text>
+        <Octicons name="bell" size={24} color="white" />        
+        <Text style={styles.optionText}>Notificação</Text>
       </TouchableOpacity>
       
       <TouchableOpacity style={styles.option}>
-      <MaterialIcons name="lock-outline" size={24} color="blue" />
+        <MaterialIcons name="lock-outline" size={24} color="white" />
         <Text style={styles.optionText}>Privacidade</Text>
       </TouchableOpacity>
-
-      
-
-      
     </View>
   );
 };
@@ -42,7 +38,8 @@ const SettingsScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#E3F2FD', 
+    backgroundColor: '#121212', 
+    color: 'white'
   },
   topLeftImage: {
     position: 'absolute',
@@ -50,14 +47,14 @@ const styles = StyleSheet.create({
     left: 20,
     width: 30,
     height: 30,
-    tintColor: '#0D47A1', 
+    tintColor: 'white', 
   },
   header: {
     fontSize: 24,
     fontWeight: 'bold',
     textAlign: 'center',
     marginVertical: 20,
-    color: '#0D47A1', 
+    color: 'white', 
   },
   option: {
     flexDirection: 'row',
@@ -65,8 +62,8 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     paddingHorizontal: 20,
     borderBottomWidth: 1,
-    borderBottomColor: '#90CAF9', 
-    backgroundColor: '#BBDEFB', 
+    borderBottomColor: '#333333', 
+    backgroundColor: '#1E1E1E', 
     borderRadius: 10,
     marginVertical: 5,
     marginHorizontal: 10,
@@ -74,7 +71,7 @@ const styles = StyleSheet.create({
   optionText: {
     fontSize: 18,
     marginLeft: 15,
-    color: '#0D47A1', 
+    color: 'white', 
     fontWeight: '600',
   },
 });

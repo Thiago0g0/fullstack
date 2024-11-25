@@ -19,54 +19,50 @@ const Cadastro = () => {
             return;
         }
         const response = await fetch('http://localhost:8000/autenticacao/registro', {
-                    method: 'POST',
-                    headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json'
-                    },
-                body: JSON.stringify({
-                    nome: nome,
-                    sobrenome: sobrenome,
-                    email: email,
-                    senha: senhaSegura,
-                    dataNascimento: dataNascimento
-                })
-            });
-            try {
-                if (response.status === 406) {
-                alert('prencha todos os campos')
-                return
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                nome: nome,
+                sobrenome: sobrenome,
+                email: email,
+                senha: senhaSegura,
+                dataNascimento: dataNascimento
+            })
+        });
+        try {
+            if (response.status === 406) {
+                alert('Preencha todos os campos');
+                return;
             }
 
             if (response.status === 400) {
-                alert('email ja existente')
-                return
+                alert('E-mail já existente');
+                return;
             }
 
             if (response.status === 201) {
-                return router.push('/Thome')
+                return router.push('/Thome');
             }
-            } catch (error) {
-                console.error(error)
-                return
-            }
-            
-        
-        };
-
-    
+        } catch (error) {
+            console.error(error);
+            return;
+        }
+    };
 
     return (
         <View style={styles.container}>
             <View style={styles.formContainer}>
                 <Text style={styles.title}>Cadastro</Text>
-                
+
                 <TextInput
                     style={styles.input}
                     placeholder="Nome"
                     value={nome}
                     onChangeText={setNome}
-                    placeholderTextColor="#aaaaaa" 
+                    placeholderTextColor="#aaaaaa"
                 />
                 <TextInput
                     style={styles.input}
@@ -108,8 +104,7 @@ const Cadastro = () => {
                 />
 
                 <Pressable style={styles.button} onPress={handleSubmit}>
-
-                        <Text style={styles.buttonText}>Cadastrar</Text>
+                    <Text style={styles.buttonText}>Cadastrar</Text>
                 </Pressable>
 
                 <Link to='/Tlogin' style={styles.link}>
@@ -126,16 +121,16 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         padding: 20,
-        backgroundColor: '#E3F2FD', 
+        backgroundColor: '#121212', 
     },
     formContainer: {
         width: '100%',
         maxWidth: 400,
-        backgroundColor: '#BBDEFB', 
+        backgroundColor: '#1E1E1E', 
         padding: 20,
         borderRadius: 10,
         elevation: 3,
-        shadowColor: '#64B5F6', 
+        shadowColor: '#000000', 
         shadowOpacity: 0.3,
         shadowRadius: 5,
     },
@@ -144,20 +139,20 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginBottom: 20,
         fontWeight: 'bold',
-        color: '#0D47A1', 
+        color: 'white',
     },
     input: {
         height: 40,
-        borderColor: '#64B5F6', 
+        borderColor: '#333333', 
         borderWidth: 1,
         borderRadius: 4,
         paddingHorizontal: 10,
         marginBottom: 15,
-        backgroundColor: '#E3F2FD', 
-        color: '#0D47A1', 
+        backgroundColor: '#1E1E1E',
+        color: '#FFFFFF', 
     },
     button: {
-        backgroundColor: '#1E88E5', 
+        backgroundColor: '#444444', 
         paddingVertical: 12,
         borderRadius: 4,
         alignItems: 'center',
@@ -174,7 +169,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     linkText: {
-        color: '#1565C0', 
+        color: '#BBDEFB', 
         fontSize: 16,
     },
 });

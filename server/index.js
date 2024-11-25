@@ -13,5 +13,4 @@ app.use(cors())
 app.use('/autenticacao', rotas_autenticacao)
 app.use('/usuario', rotas_usuarios)
 
-
 app.listen(8000)

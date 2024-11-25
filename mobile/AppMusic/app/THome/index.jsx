@@ -9,9 +9,10 @@ const HomeScreen = () => {
             <View style={styles.header}>
                 <Text style={styles.title}>Spotfake</Text>
                 <Link href="/Tconfig">
-                    <Feather name="settings" size={24} color="blue" />
+                    <Feather name="settings" size={24} color="white" />
                 </Link>
             </View>
+
             <Link href="/Tplaylist" style={styles.navButtonContainer}>
                 <View style={styles.navButton}>
                     <Text style={styles.navButtonText}>Criar playlist</Text>
@@ -19,8 +20,8 @@ const HomeScreen = () => {
             </Link>
 
             <Text style={styles.sectionTitle}>Gêneros de músicas</Text>
-            <View style={styles.musicGrid}>
-                <Text style={styles.musicItemText}>Rock</Text>
+            <ScrollView contentContainerStyle={styles.musicGrid} nestedScrollEnabled>
+                <Text href='/Thome/musicas' style={styles.musicItemText}>Rock</Text>
                 <Text style={styles.musicItemText}>Rap</Text>
                 <Text style={styles.musicItemText}>K-Pop</Text>
                 <Text style={styles.musicItemText}>Jazz</Text>
@@ -28,7 +29,11 @@ const HomeScreen = () => {
                 <Text style={styles.musicItemText}>Reggae</Text>
                 <Text style={styles.musicItemText}>MPB</Text>
                 <Text style={styles.musicItemText}>Metal</Text>
-            </View>
+                <Text style={styles.musicItemText}>Pop</Text>
+                <Text style={styles.musicItemText}>Blues</Text>
+                <Text style={styles.musicItemText}>Eletrônica</Text>
+                <Text style={styles.musicItemText}>Clássica</Text>
+            </ScrollView>
         </ScrollView>
     );
 };
@@ -36,9 +41,9 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
     container: {
         padding: 16,
-        backgroundColor: '#E3F2FD',
+        backgroundColor: '#121212',  
         flex: 1,
-        alignItems: 'center',  
+        alignItems: 'center',
     },
     header: {
         flexDirection: 'row',
@@ -46,35 +51,28 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginBottom: 20,
         width: '100%',
-        paddingHorizontal: 20,  
+        paddingHorizontal: 20,
     },
     title: {
         fontSize: 24,
         fontWeight: 'bold',
-        color: '#0D47A1',
-        textAlign: 'center', 
-        width: '100%', 
-    },
-    profileImage: {
-        width: 35,
-        height: 35,
-        borderRadius: 25,
-        borderWidth: 2,
-        borderColor: '#1E88E5',
+        color: '#FFFFFF',  
+        textAlign: 'center',
+        width: '100%',
     },
     navButtonContainer: {
-        alignItems: 'center',  
+        alignItems: 'center',
         marginBottom: 20,
-        width: '100%',  
+        width: '100%',
     },
     navButton: {
-        backgroundColor: '#1E88E5',
+        backgroundColor: '#333333', 
         paddingVertical: 12,
         borderRadius: 8,
         alignItems: 'center',
         justifyContent: 'center',
         height: 60,
-        width: '100%', 
+        width: '100%',
     },
     navButtonText: {
         color: '#FFFFFF',
@@ -84,7 +82,7 @@ const styles = StyleSheet.create({
     sectionTitle: {
         fontSize: 20,
         fontWeight: 'bold',
-        color: '#1565C0',
+        color: '#FFFFFF',  
         marginBottom: 10,
         textAlign: 'center',
     },
@@ -101,13 +99,13 @@ const styles = StyleSheet.create({
         textAlignVertical: 'center',
         fontSize: 20,
         fontWeight: 'bold',
-        color: '#FFFFFF',
-        backgroundColor: '#0D47A1',
+        color: '#121212',  
+        backgroundColor: '#FFFFFF', 
         borderRadius: 8,
         marginBottom: 10,
         paddingVertical: 5,
         borderWidth: 2,
-        borderColor: '#1565C0',
+        borderColor: '#121212',  
     },
 });
 

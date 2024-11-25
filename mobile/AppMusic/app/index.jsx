@@ -15,20 +15,18 @@ const style = StyleSheet.create({
         top: 0,
         height: 900,
     }, 
-    
-
 
 })
 
 const splashScreen = function () {
     return <View style={style.container}>
         <LinearGradient
-            colors={['#07810d', '#048061', '#1fd668']}
+            colors={['black','white']}
             style={style.background}
         />
         <Link href="/Tlogin">
         <Image style={style.logo}
-            source={require('../assets/images/spot.png')}
+            source={require('../assets/images/logo.png')}
         />
         </Link>
     </View>

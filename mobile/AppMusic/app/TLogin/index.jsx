@@ -102,7 +102,7 @@ export default function App() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#E3F2FD',
+        backgroundColor: '#121212',
         padding: 20,
         justifyContent: 'center',
     },
@@ -111,15 +111,15 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginBottom: 20,
         textAlign: 'center',
-        color: '#0D47A1', 
+        color: '#ffffff', 
     },
     inputContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: '#BBDEFB', 
+        backgroundColor: '#1E1E1E', 
         borderRadius: 5,
         borderWidth: 1,
-        borderColor: '#64B5F6',
+        borderColor: '#333333', 
         marginBottom: 15,
         paddingHorizontal: 10,
     },
@@ -128,18 +128,18 @@ const styles = StyleSheet.create({
         height: 40,
         fontSize: 16,
         paddingHorizontal: 10,
-        color: '#0D47A1', 
+        color: '#ffffff', 
     },
     icon: {
         marginLeft: 10,
-        color: '#1E88E5', 
+        color: '#ffffff',
     },
     buttonContainer: {
         alignItems: 'center',
         marginBottom: 20,
     },
     button: {
-        backgroundColor: '#1E88E5', 
+        backgroundColor: '#444444', 
         paddingVertical: 15,
         borderRadius: 5,
         width: '100%',
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
     },
     buttonText: {
-        color: '#FFFFFF', 
+        color: '#ffffff', 
         fontSize: 18,
         textAlign: 'center',
     },
@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
     linkText: {
-        color: '#0D47A1', 
+        color: '#BBDEFB', 
         fontSize: 16,
     },
 });
