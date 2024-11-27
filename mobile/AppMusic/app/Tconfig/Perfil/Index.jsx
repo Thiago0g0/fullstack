@@ -66,6 +66,8 @@ const ProfileScreen = () => {
 
                 <Text style={styles.profileName}>Nome do Usuário</Text>
                 <TouchableOpacity style={styles.button} onPress={togglePasswordChange}>
+
+                {/* Não consigui fazer para trocar de senha */}
                     <Text style={styles.buttonText}>Mudar senha</Text>
                 </TouchableOpacity>
 
