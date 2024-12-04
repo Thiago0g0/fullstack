@@ -5,6 +5,10 @@ import { rotas_autenticacao } from './rotas/rotas_autenticacao.js'
 import { rotas_usuarios } from './rotas/rotas_usuarios.js'
 import { criarTabelas } from './db.js'
 
+//render
+import dotenv from 'dotenv'
+dotenv.config()
+
 
 const app = Express()
 app.use(Express.json())
