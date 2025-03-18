@@ -1,186 +1,162 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Pressable, StyleSheet, Alert } from 'react-native';
+import { View, Text, TextInput, Pressable, StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Iconsenha from 'react-native-vector-icons/Ionicons';
-import { Link } from 'expo-router';
+import { Link, useRouter } from 'expo-router';
 
 export default function App() {
+    const router = useRouter()
     const [formData, setFormData] = useState({
-        name: '',
         email: '',
-        password: '',
+        senha: '',
     });
-    const [showSenha, setShowSenha] = useState(false);
-    const [mensagem, setMensagem] = useState('');
+    const [mostrarSenha, setMostrarSenha] = useState(false);
 
-    const handleChange = (name, value) => {
+    const handleChange = (nome, valor) => {
         setFormData(prevState => ({
             ...prevState,
-            [name]: value,
+            [nome]: valor,
         }));
     };
 
     const handleSubmit = async () => {
-        if (!formData.name || !formData.email || !formData.password) {
-            Alert.alert("Todos os campos devem ser preenchidos");
+        if (!formData.email || !formData.senha) {
+            alert("Todos os campos devem ser preenchidos");
             return;
         }
         try {
-            const response = await fetch('https://taskhub-s37f.onrender.com/auth/signup', {
-                method: "POST",
-                headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json",
+            const response = await fetch('http://localhost:8000/autenticacao/login', {
+                    method: 'POST',
+                    headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(formData),
+                body: JSON.stringify(formData)
             });
 
-            if (!response.ok) {
-                throw new Error('Erro na solicitação: ' + response.statusText);
+            console.log(response.status)
+            if (response.status === 405) {
+                alert("email incorretos");
+                return
             }
 
-            setMensagem("Cadastro realizado com sucesso!");
-            setFormData({
-                name: '',
-                email: '',
-                password: '',
-            });
+            if (response.status === 404) {
+                alert("senha incorretos");
+                return
+            }
+
+            if (response.status === 200) {
+                router.push('/Thome')
+                return
+            }
         } catch (error) {
-            setMensagem("Houve um erro ao realizar o cadastro.");
-        }
+            console.error('Erro:', error);
+        } 
+       
     };
-    
+
     return (
         <View style={styles.container}>
-            <View style={styles.saldoContainer}>
-                <Text style={styles.label}>Login</Text>
+            <Text style={styles.label}>Login</Text>
+            <View style={styles.inputContainer}>
+                <TextInput
+                    style={styles.input}
+                    keyboardType="email-address"
+                    placeholder="Digite o email..."
+                    placeholderTextColor="#888"
+                    value={formData.email}
+                    onChangeText={(text) => handleChange('email', text)}
+                />
+                <Icon style={styles.icon} name='mail' size={25} color="#ffffff" />
             </View>
-            <View style={styles.saldoContainer}>
-                <View style={styles.inputContainer}>
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Digite o nome..."
-                        value={formData.name}
-                        onChangeText={(text) => handleChange('name', text)}
-                    />
-                    <Icon style={styles.iconu} name='user' size={25} color="#fff" />
-                </View>
+
+            <View style={styles.inputContainer}>
+                <TextInput
+                    style={styles.input}
+                    placeholder="Digite a senha..."
+                    placeholderTextColor="#888"
+                    value={formData.senha}
+                    onChangeText={(text) => handleChange('senha', text)}
+                    secureTextEntry={!mostrarSenha}
+                />
+                <Pressable onPress={() => setMostrarSenha(!mostrarSenha)}>
+                    <Iconsenha name={mostrarSenha ? 'eye-off' : 'eye'} size={25} color="#ffffff" />
+                </Pressable>
             </View>
-            <View style={styles.saldoContainer}>
-                <View style={styles.inputContainer}>
-                    <TextInput
-                        style={styles.input}
-                        keyboardType="email-address"
-                        placeholder="Digite o email..."
-                        value={formData.email}
-                        onChangeText={(text) => handleChange('email', text)}
-                    />
-                    <Icon style={styles.iconm} name='mail' size={25} color="#fff" />
-                </View>
+
+            <View style={styles.buttonContainer}>
+                <TouchableOpacity
+                    style={styles.button}
+                    onPress={handleSubmit}>
+                    <Text style={styles.buttonText}>Logar</Text>
+                </TouchableOpacity>
             </View>
-            <View style={styles.saldoContainer}>
-                <View style={styles.inputContainer}>
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Digite a senha..."
-                        value={formData.password}
-                        onChangeText={(text) => handleChange('password', text)}
-                        secureTextEntry={showSenha}
-                    />
-                    <Pressable style={styles.icon} onPress={() => setShowSenha(!showSenha)}>
-                        <Iconsenha style={styles.icon} name={showSenha ? 'eye' : 'eye-off'} color="#FFF" size={30} />
-                    </Pressable>
-                </View>
-            </View>
-            <View style={styles.formButton}>
-                <Link href="/">
-                    <Pressable style={styles.buttoncadastro} onPress={handleSubmit}>
-                        <Text style={styles.cadastro}>Entrar</Text>
-                    </Pressable>
-                </Link>
-                <Link href="/TCadastro" style={styles.link}>
-                    <Text style={styles.linkText}>Fazer cadastro!</Text>
-                </Link>
-            </View>
-            {mensagem ? <Text style={styles.mensagem}>{mensagem}</Text> : null}
+
+            <Link href="/Tcadastro" style={styles.link}>
+                <Text style={styles.linkText}>Já tem uma conta? Faça Login</Text>
+            </Link>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'white',
-        height: '100%',
-        flexDirection: 'column',
-        alignItems: 'center',
+        flex: 1,
+        backgroundColor: '#121212',
+        padding: 20,
         justifyContent: 'center',
-        gap: 20,
-    },
-    icon: {
-        color: 'black',
-        marginRight: 3,
-    },
-    iconu: {
-        color: 'black',
-        marginRight: 1,
-    },
-    iconm: {
-        color: 'black',
-        marginRight: 1,
     },
     label: {
-        alignItems: 'center',
-        fontSize: 30,
-        margin: 20
-    },
-    formButton: {
-        marginTop: 110,
-        flexDirection: 'column',
-        alignItems: 'center', 
+        fontSize: 24,
+        fontWeight: 'bold',
+        marginBottom: 20,
+        textAlign: 'center',
+        color: '#ffffff', 
     },
     inputContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        borderWidth: 1,
-        borderColor: '#ccc',
+        backgroundColor: '#1E1E1E', 
         borderRadius: 5,
-        backgroundColor: '#f5f5f5',
-        paddingHorizontal: 15,
-        paddingVertical: 7,
-        width: 750,
+        borderWidth: 1,
+        borderColor: '#333333', 
+        marginBottom: 15,
+        paddingHorizontal: 10,
     },
     input: {
         flex: 1,
         height: 40,
-        fontSize: 15,
-        color: '#333',
+        fontSize: 16,
+        paddingHorizontal: 10,
+        color: '#ffffff', 
     },
-
-    buttoncadastro: {
-        width: 300,
-        height: 57,
-        backgroundColor: 'black',
-        borderRadius: 5,
-        paddingVertical: 10,
-        paddingHorizontal: 20,
+    icon: {
+        marginLeft: 10,
+        color: '#ffffff',
+    },
+    buttonContainer: {
         alignItems: 'center',
-        justifyContent: 'center',
-        margin: 10,
-        marginTop: -40
+        marginBottom: 20,
+    },
+    button: {
+        backgroundColor: '#444444', 
+        paddingVertical: 15,
+        borderRadius: 5,
+        width: '100%',
+        textAlign: 'center',
+        alignSelf: 'center',
     },
     buttonText: {
-        fontSize: 30,
+        color: '#ffffff', 
+        fontSize: 18,
         textAlign: 'center',
     },
-    cadastro: {
-        fontSize: 20,
-        textAlign: 'center',
-        color: 'white',
+    link: {
+        alignItems: 'center',
+        marginBottom: 20,
     },
     linkText: {
+        color: '#BBDEFB', 
         fontSize: 16,
-        color: '#0000FF',
-        marginTop: 10,
-        textAlign: 'center',
     },
 });

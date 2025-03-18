@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { Image, View, StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Link } from 'expo-router';
@@ -15,19 +14,19 @@ const style = StyleSheet.create({
         right: 0,
         top: 0,
         height: 900,
-    }
+    }, 
 
 })
 
 const splashScreen = function () {
     return <View style={style.container}>
         <LinearGradient
-            colors={['green', 'black']}
+            colors={['black','white']}
             style={style.background}
         />
-        <Link href="/TLogin">
+        <Link href="/Tlogin">
         <Image style={style.logo}
-            source={require('../assets/images/spot.png')}
+            source={require('../assets/images/logo.png')}
         />
         </Link>
     </View>
